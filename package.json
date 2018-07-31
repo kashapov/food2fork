@@ -4,7 +4,9 @@
   "description": "food2fork project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --mode development --open"
   },
   "repository": {
     "type": "git",
@@ -17,7 +19,10 @@
   },
   "homepage": "https://github.com/kashapov/food2fork#readme",
   "devDependencies": {
-    "webpack": "^4.16.3"
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.16.3",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.5"
   },
   "dependencies": {
     "jquery": "^3.3.1"
