@@ -1,0 +1,25 @@
+{
+  "name": "food2fork",
+  "version": "1.0.0",
+  "description": "food2fork project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kashapov/food2fork.git"
+  },
+  "author": "Kashapov Andrey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kashapov/food2fork/issues"
+  },
+  "homepage": "https://github.com/kashapov/food2fork#readme",
+  "devDependencies": {
+    "webpack": "^4.16.3"
+  },
+  "dependencies": {
+    "jquery": "^3.3.1"
+  }
+}
