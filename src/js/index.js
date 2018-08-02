@@ -9,9 +9,9 @@ import { elements, renderLoader, clearLoader } from './views/base';
  * - Liked recipes
  */
 
- const state = {};
+const state = {};
 
- const controlSearch = async () => {
+const controlSearch = async () => {
   // 1. get query from view
   const query = searchView.getInput();
   //console.log(query);
@@ -35,14 +35,22 @@ import { elements, renderLoader, clearLoader } from './views/base';
     searchView.renderResults(state.search.result);
 
   }
- };
+};
 
- elements.searchForm.addEventListener('submit', e => {
-   e.preventDefault();
-   controlSearch();
- });
+elements.searchForm.addEventListener('submit', e => {
+  e.preventDefault();
+  controlSearch();
+});
 
 
-//const search = new Search('pizza');
-//console.log(search);
+elements.searchResPages.addEventListener('click', e => {
+  const btn = e.target.closest('.btn-inline');
+  //console.log(btn);
+  if (btn) {
+    const goToPage = parseInt(btn.dataset.goto, 10);
+    //console.log(goToPage);
+    searchView.clearResults();
+    searchView.renderResults(state.search.result, goToPage);
+  }
+});
 
