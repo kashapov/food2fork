@@ -70,7 +70,7 @@ elements.searchResPages.addEventListener('click', e => {
 const controlRecipe = async () => {
   // get ID from url
   const id = window.location.hash.replace('#', '');
-  console.log(id);
+  //console.log(id);
 
   if (id) {
     // prepare UI for changes
@@ -108,3 +108,20 @@ const controlRecipe = async () => {
 //window.addEventListener('hashchange', controlRecipe);
 //window.addEventListener('load', controlRecipe);
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
+
+
+// handling recipe button clicks
+elements.recipe.addEventListener('click', e => {
+  if(e.target.matches('.btn-decrease, .btn-decrease *')) {
+    // decrease button is clicked
+    if(state.recipe.servings > 1) {
+      state.recipe.updateServings('dec');
+      recipeView.updateServingsIngredients(state.recipe);
+    }
+  } else if(e.target.matches('.btn-increase, .btn-increase *')) {
+    // increase button is clicked
+    state.recipe.updateServings('inc');
+    recipeView.updateServingsIngredients(state.recipe);
+  }
+  //console.log(state.recipe);
+});
