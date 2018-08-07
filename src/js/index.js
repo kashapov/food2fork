@@ -14,6 +14,7 @@ import { elements, renderLoader, clearLoader } from './views/base';
  */
 
 const state = {};
+window.state = state;
 
 /** 
  * SEARCH CONTROLLER
@@ -130,7 +131,26 @@ const controlList = () => {
 };
 
 
+// handle delete and update list item events
+elements.shopping.addEventListener('click', e => {
+  const id = e.target.closest('.shopping__item').dataset.itemid;
+  //console.log(id);
+  
+  // handle delete button
+  if (e.target.matches('.shopping__delete, .shopping__delete *')) {
+    // delete from state
+    state.list.deleteItem(id);
 
+    // delete from UI
+    listView.deleteItem(id);
+
+    // handle the count update
+  } else if (e.target.matches('.shopping__count-value')) {
+    const val = parseFloat(e.target.value, 10);
+    state.list.updateCount(id, val);
+  }
+
+});
 
 
 // handling recipe button clicks
