@@ -1,4 +1,4 @@
-export default class Lies {
+export default class Likes {
   constructor() {
     this.likes = [];
   }
