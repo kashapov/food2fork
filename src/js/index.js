@@ -8,6 +8,16 @@ import * as listView from './views/listView';
 import * as likesView from './views/likesView';
 import { elements, renderLoader, clearLoader } from './views/base';
 
+
+/**
+ * TODO:
+ * - implementing button to delete all shopping list items
+ * - implement functionality to manualy add items to shopping list
+ * - save shopping data in local storage
+ * - ...
+ */
+
+
 /** Global state of the app
  * - Search object
  * - Current recipe object
@@ -16,7 +26,7 @@ import { elements, renderLoader, clearLoader } from './views/base';
  */
 
 const state = {};
-window.state = state;
+//window.state = state;
 
 /** 
  * SEARCH CONTROLLER
@@ -107,7 +117,7 @@ const controlRecipe = async () => {
         state.likes.isLiked(id)
       );
     } catch (err) {
-      console.log(err);
+      //console.log(err);
       alert('Error processing recipe!');
     }
 
@@ -140,7 +150,6 @@ const controlList = () => {
 /** 
  * LIKE CONTROLLER
  */
-
 const controlLike = () => {
   if (!state.likes) {
     state.likes = new Likes();
@@ -188,7 +197,7 @@ const controlLike = () => {
 // restore liked recepes on page load
 window.addEventListener('load', () => {
   state.likes = new Likes();
-  
+
   // restore likes
   state.likes.readStorage();
 
@@ -244,7 +253,4 @@ elements.recipe.addEventListener('click', e => {
   }
   //console.log(state.recipe);
 });
-
-
-
 
