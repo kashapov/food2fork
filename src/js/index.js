@@ -8,6 +8,16 @@ import * as listView from './views/listView';
 import * as likesView from './views/likesView';
 import { elements, renderLoader, clearLoader } from './views/base';
 
+
+/**
+ * TODO:
+ * - implementing button to delete all shopping list items
+ * - implement functionality to manualy add items to shopping list
+ * - save shopping data in local storage
+ * - ...
+ */
+
+
 /** Global state of the app
  * - Search object
  * - Current recipe object
@@ -16,7 +26,7 @@ import { elements, renderLoader, clearLoader } from './views/base';
  */
 
 const state = {};
-window.state = state;
+//window.state = state;
 
 /** 
  * SEARCH CONTROLLER
@@ -107,7 +117,7 @@ const controlRecipe = async () => {
         state.likes.isLiked(id)
       );
     } catch (err) {
-      console.log(err);
+      //console.log(err);
       alert('Error processing recipe!');
     }
 
@@ -140,19 +150,15 @@ const controlList = () => {
 /** 
  * LIKE CONTROLLER
  */
-//TESTING
-state.likes = new Likes();
-likesView.toggleLikeMenu(state.likes.getNumLikes());
-
 const controlLike = () => {
-  if(!state.likes) {
+  if (!state.likes) {
     state.likes = new Likes();
   }
 
   const currentID = state.recipe.id;
 
   // user has NOT yet liked current recipe
-  if(!state.likes.isLiked(currentID)) {
+  if (!state.likes.isLiked(currentID)) {
     // add like to the state
     const newLike = state.likes.addLike(
       currentID,
@@ -167,9 +173,9 @@ const controlLike = () => {
     // add like to UI list
     //console.log(state.likes);
     likesView.renderLike(newLike);
-    
-  
-  // user HAS liked current recipe
+
+
+    // user HAS liked current recipe
   } else {
     // remove like from the state
     state.likes.deleteLike(currentID);
@@ -180,7 +186,7 @@ const controlLike = () => {
     // remove like from UI list
     //console.log(state.likes);
     likesView.deleteLike(currentID);
-    
+
   }
 
   likesView.toggleLikeMenu(state.likes.getNumLikes());
@@ -188,13 +194,27 @@ const controlLike = () => {
 };
 
 
+// restore liked recepes on page load
+window.addEventListener('load', () => {
+  state.likes = new Likes();
+
+  // restore likes
+  state.likes.readStorage();
+
+  // toggle like button
+  likesView.toggleLikeMenu(state.likes.getNumLikes());
+
+  // render the existing likes
+  state.likes.likes.forEach(like => likesView.renderLike(like));
+});
+
 
 
 // handle delete and update list item events
 elements.shopping.addEventListener('click', e => {
   const id = e.target.closest('.shopping__item').dataset.itemid;
   //console.log(id);
-  
+
   // handle delete button
   if (e.target.matches('.shopping__delete, .shopping__delete *')) {
     // delete from state
@@ -233,7 +253,4 @@ elements.recipe.addEventListener('click', e => {
   }
   //console.log(state.recipe);
 });
-
-
-
 
